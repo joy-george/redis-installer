@@ -1,0 +1,6 @@
+source 'https://rubygems.org'
+
+gem 'chefspec', '~> 4.5'
+gem 'guard'
+gem 'guard-rspec'
+gem 'berkshelf'
