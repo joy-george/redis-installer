@@ -57,10 +57,5 @@ describe 'install-redis::from-package' do
               user: 'root',
               code: 'make install')
     end
-
-    it 'creates a link with redis directory' do
-      expect(chef_run).to create_link(redis_directory)
-        .with(to: install_directory)
-    end
   end
 end

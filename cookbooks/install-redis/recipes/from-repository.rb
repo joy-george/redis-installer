@@ -11,5 +11,5 @@ custom_install 'redis' do
   branch node['redis']['git']['branch']
   resource_directory node['redis']['resource_directory']
   action :install
-  not_if { !platform_family?('ubuntu') && File.exist?(node['redis']['resource_directory']) }
+  not_if { !platform_family?('ubuntu') }
 end
