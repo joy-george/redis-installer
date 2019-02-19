@@ -8,7 +8,7 @@ require 'spec_helper'
 
 describe 'install-redis::from-package' do
   context 'When all attributes are default, on Ubuntu 16.04' do
-    let(:download_directory) { '/tmp/redis_git_2' }
+    let(:download_directory) { '/custom_downloads' }
     let(:install_directory) { "#{download_directory}/redis-5.0.3" }
     let(:package_url) { 'http://download.redis.io/releases/redis-5.0.3.tar.gz' }
     let(:version) { '5.0.3' }

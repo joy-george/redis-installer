@@ -9,9 +9,11 @@ require 'spec_helper'
 describe 'install-redis::from-repository' do
   context 'When all attributes are default, on Ubuntu 16.04' do
     let(:installation_type) { 'git' }
-    let(:download_directory) { '/tmp/redis_git_2/redis-5.0.3' }
+    let(:download_directory) { '/custom_downloads' }
+    let(:install_directory) { "#{download_directory}/redis-5.0.3" }
     let(:repository) { 'https://github.com/antirez/redis.git' }
-    let(:revision) { '5.0' }
+    # TODO change revison to sha
+    let(:revision) { 'refs/tags/5.0.3' }
     let(:redis_directory) { '/usr/local/share/redis' }
     let(:chef_run) do
       runner = ChefSpec::ServerRunner
@@ -36,21 +38,21 @@ describe 'install-redis::from-repository' do
 
     it 'build package' do
       expect(chef_run).to run_bash('make')
-        .with(cwd: download_directory,
+        .with(cwd: install_directory,
               user: 'root',
               code: 'make')
     end
 
     it 'install package' do
       expect(chef_run).to run_bash('make_install')
-        .with(cwd: download_directory,
+        .with(cwd: install_directory,
               user: 'root',
               code: 'make install')
     end
 
     it 'creates a link with redis directory' do
       expect(chef_run).to create_link(redis_directory)
-        .with(to: download_directory)
+        .with(to: install_directory)
     end
   end
 end

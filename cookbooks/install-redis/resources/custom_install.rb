@@ -11,16 +11,15 @@ property :installation_type, String
 property :resource_directory, String
 
 action :install do
+  #@download_directory = "#{node['custom_install']['download_directory']}/#{new_resource.custom_resource_name}-#{new_resource.version}"
   @download_directory = node['custom_install']['download_directory']
-  @install_directory = "#{@download_directory}/#{new_resource.custom_resource_name}-#{new_resource.version}"
+  @install_directory = "#{@download_directory}/redis-5.0.3"
+  action_create_directory
+  
   case new_resource.installation_type
   when 'git'
-    @download_directory = @install_directory
-    action_create_directory
     action_download_from_version_control
-
   else
-    action_create_directory
     action_download_from_package
     action_uncompress_tar
   end
@@ -38,9 +37,11 @@ action :create_directory do
 end
 
 action :download_from_version_control do
+  working_dir = @install_directory
   git @download_directory do
     repository new_resource.url
-    revision new_resource.branch
+    revision 'refs/tags/5.0.3'
+    destination working_dir
     action :sync
   end
 end
