@@ -23,7 +23,6 @@ action :install do
   end
   action_build_package
   action_install_package
-  action_link_resource_directory
 end
 action :create_directory do
   directory @download_directory do
@@ -74,13 +73,5 @@ action :install_package do
     user 'root'
     cwd working_dir
     code 'make install'
-  end
-end
-
-action :link_resource_directory do
-  working_dir = @install_directory
-  link new_resource.resource_directory do
-    to working_dir
-    action :create
   end
 end
