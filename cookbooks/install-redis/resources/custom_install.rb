@@ -11,11 +11,9 @@ property :installation_type, String
 property :resource_directory, String
 
 action :install do
-  #@download_directory = "#{node['custom_install']['download_directory']}/#{new_resource.custom_resource_name}-#{new_resource.version}"
   @download_directory = node['custom_install']['download_directory']
   @install_directory = "#{@download_directory}/redis-5.0.3"
   action_create_directory
-  
   case new_resource.installation_type
   when 'git'
     action_download_from_version_control
