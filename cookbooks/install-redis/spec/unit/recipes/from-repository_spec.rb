@@ -12,7 +12,7 @@ describe 'install-redis::from-repository' do
     let(:download_directory) { '/custom_downloads' }
     let(:install_directory) { "#{download_directory}/redis-5.0.3" }
     let(:repository) { 'https://github.com/antirez/redis.git' }
-    # TODO change revison to sha
+    # TODO: change revison to sha
     let(:revision) { 'refs/tags/5.0.3' }
     let(:redis_directory) { '/usr/local/share/redis' }
     let(:chef_run) do
