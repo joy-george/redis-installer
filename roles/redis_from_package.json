@@ -1,5 +1,5 @@
 {
-  "name": "redis_from_repo",
+  "name": "redis_from_package",
   "description": "redis server role.",
   "json_class": "Chef::Role",
   "default_attributes": {
@@ -9,7 +9,7 @@
   },
   "chef_type": "role",
   "run_list": ["recipe[install-redis::default]",
-    "recipe[install-redis::from-repository]"
+    "recipe[install-redis::from-package]"
   ],
   "env_run_lists": {
   }
