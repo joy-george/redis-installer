@@ -12,7 +12,7 @@ describe 'install-redis::from-package' do
     let(:install_directory) { "#{download_directory}/redis-5.0.3" }
     let(:package_url) { 'http://download.redis.io/releases/redis-5.0.3.tar.gz' }
     let(:version) { '5.0.3' }
-    let(:redis_directory) { '/usr/local/share/redis' }
+    let(:redis_directory) { '/etc/redis' }
     let(:chef_run) do
       runner = ChefSpec::ServerRunner
                .new(step_into: 'custom_install',
