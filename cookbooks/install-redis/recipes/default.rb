@@ -37,7 +37,7 @@ directory node['redis']['db_directory'] do
   action :create
 end
 
-directory node['redis']['resource_directory'] do
+directory node['redis']['etc_conf_dir'] do
   group 'root'
   owner 'root'
   recursive true

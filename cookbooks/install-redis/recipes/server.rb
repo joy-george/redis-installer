@@ -4,7 +4,7 @@
 #
 # Copyright:: 2019, The Authors, All Rights Reserved.
 
-template "#{node['redis']['resource_directory']}/redis.conf" do
+template "#{node['redis']['etc_conf_dir']}/redis.conf" do
   source 'redis.conf.erb'
   variables partials: {
     'fqdn' => node[:fqdn],
@@ -21,7 +21,7 @@ template '/etc/systemd/system/redis.service' do
     'fqdn' => node['fqdn'],
     'user' => node['redis']['user'],
     'group' => node['redis']['group'],
-    'conf_file' => "#{node['redis']['resource_directory']}/redis.conf",
+    'conf_file' => "#{node['redis']['etc_conf_dir']}/redis.conf",
   }
 end
 
