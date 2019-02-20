@@ -7,9 +7,9 @@
 custom_install 'redis' do
   url node['redis']['git']['url']
   version node['redis']['git']['version']
-  installation_type 'git'
-  branch node['redis']['git']['branch']
+  rep_revision "refs/tags/#{node['redis']['git']['version']}"
   resource_directory node['redis']['resource_directory']
+  installation_type 'git'
   action :install
-  not_if { !platform_family?('ubuntu') && File.exist?(node['redis']['resource_directory']) }
+  only_if { platform?('ubuntu') && !::Dir.exist?(node['redis']['resource_directory']) }
 end

@@ -9,7 +9,8 @@
   },
   "chef_type": "role",
   "run_list": ["recipe[install-redis::default]",
-    "recipe[install-redis::from-package]"
+    "recipe[install-redis::from-package]",
+    "recipe[install-redis::server]"
   ],
   "env_run_lists": {
   }

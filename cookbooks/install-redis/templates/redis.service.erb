@@ -1,0 +1,13 @@
+[Unit]
+Description=Redis In-Memory Data Store
+After=network.target
+
+[Service]
+User=<%= @partials['user'] %>
+Group=<%= @partials['group'] %>
+ExecStart=/usr/local/bin/redis-server <%= @partials['conf_file'] %>
+ExecStop=/usr/local/bin/redis-cli shutdown
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
