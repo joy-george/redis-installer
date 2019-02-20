@@ -16,6 +16,7 @@
 ## Ignore Chef-Zero files
 clients
 nodes
+.vagrant
 
 # ## OS junk files
 # [Tt]humbs.db
