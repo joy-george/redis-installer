@@ -1,0 +1,20 @@
+rvm:
+- 2.0.0
+- 2.1
+- 2.2
+
+branches:
+  only:
+    - master
+
+sudo: true
+
+bundler_args: --without='vagrant'
+
+before_script:
+- source <(curl -sL https://raw.githubusercontent.com/zuazo/kitchen-in-travis/master/scripts/start_docker.sh)
+
+script:
+- travis_retry bundle exec rake integration:vagrant
+
+after_failure: cat docker_daemon.log
