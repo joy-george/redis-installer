@@ -15,7 +15,7 @@ property :tar_package, String
 
 action :install do
   new_resource.download_directory = Chef::Config['file_cache_path']
-  new_resource.usr_local = node['redis']['usr_local']
+  new_resource.usr_local = node['usr_local']
   new_resource.tar_package = "#{new_resource.custom_resource_name}-#{new_resource.version}.tar.gz"
   case new_resource.installation_type
   when 'git'
