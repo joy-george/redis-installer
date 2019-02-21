@@ -6,14 +6,11 @@ gem 'guard-rspec'
 gem 'berkshelf'
 gem 'inspec'
 gem 'rake'
-
 group :integration do
-    gem 'test-kitchen', '~> 1.2'
-    gem 'kitchen-inspec'
-  end
-  
-  group :vagrant do
-    gem 'vagrant-wrapper', '~> 2.0'
-    gem 'kitchen-vagrant', '~> 0.18'
-  end
-  
+  gem 'test-kitchen', '~> 1.2'
+  gem 'kitchen-inspec'
+end
+group :vagrant do
+  gem 'vagrant-wrapper', '~> 2.0'
+  gem 'kitchen-vagrant', '~> 0.18'
+end

@@ -9,8 +9,6 @@ branches:
 
 sudo: true
 
-bundler_args: --without='vagrant'
-
 before_script:
 - source <(curl -sL https://raw.githubusercontent.com/zuazo/kitchen-in-travis/master/scripts/start_docker.sh)
 
