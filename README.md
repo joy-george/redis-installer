@@ -1,24 +1,62 @@
-# Overview
+# Redis Installer
 
-Every Chef installation needs a Chef Repository. This is the place where cookbooks, roles, config files and other artifacts for managing systems with Chef will live. We strongly recommend storing this repository in a version control system such as Git and treat it like source code.
+It sets up **Ubuntu-16.04** Virtual Boxes and installs **Redis-5.0.3** from package(tar.gz) and/or from it's repository using Vagrant. The installation and configuration is done using Chef cookbook-**install-redis** and hence it can be used on any (currently only `ubuntu 16.04`) Chef Client hosts
 
-While we prefer Git, and make this repository available via GitHub, you are welcome to download a tar or zip archive and use your favorite version control system to manage the code.
+## Requirements
+Tested with below components on OSX-10.14.3
+- [VirtualBox 6.0](https://www.virtualbox.org/wiki/Downloads)
+- [Vagrant 2.2.3](https://www.vagrantup.com/downloads.html)
+- [Chef Development Kit Version: 3.7.23](https://downloads.chef.io/chefdk/) - For running integration tests.
 
-# Repository Directories
+## Installation
+Once the requirements are installed, open up a terminal. We'll need to clone this repository and setup vagrant:
 
-This repository contains several directories, and each directory contains a README file that describes what it is for in greater detail, and how to use it for managing your systems with Chef.
+##### Clone Repository
+```SH
+git clone https://github.com/joy-george/redis-installer.git
+cd redis-installer
+```
 
-- `cookbooks/` - Cookbooks you download or create.
-- `data_bags/` - Store data bags and items in .json in the repository.
-- `roles/` - Store roles in .rb or .json in the repository.
-- `environments/` - Store environments in .rb or .json in the repository.
+##### Check Vagrant is functional
+```SH
+redis-installer$ vagrant up --no-provision
+```
 
-# Configuration
+##### Creating Node directory
+This will help vagrant to store all the node information
+```SH
+redis-installer$ mkdir nodes
+```
 
-The config file, `.chef/knife.rb` is a repository specific configuration file for knife. If you're using the Chef Platform, you can download one for your organization from the management console. If you're using the Open Source Chef Server, you can generate a new one with `knife configure`. For more information about configuring Knife, see the Knife documentation.
+## Provisioning
+```SH
+redis-installer$ vagrant provision
+```
 
-<https://docs.chef.io/knife.html>
+The current vagrant setup will create 2 virtual boxes
+- **172.30.0.140:** With Redis server installed from package
+- **172.30.0.141:** With Redis server installed from repository
 
-# Next Steps
+If required, the above configuration can be modified from the [Vagrantfile](https://github.com/joy-george/redis-installer/blob/master/Vagrantfile "Vagrantfile")
 
-Read the README file in each of the subdirectories for more information about what goes in those directories.
+## Testing
+Integration test can be done after provision to verify
+-   Redis has been installed
+-   Redis is running
+-   Redis is runing on version 5.0.3
+-   Configuration changes are in place and correct
+-   Service listens to necessary ports (6379)
+-  Redis is able to set and get test key values
+
+#### Executing the test
+##### Testing **172.30.0.140:**
+```SH
+redis-installer$ chef exec inspec exec cookbooks/install-redis/test/integration/default/server_test.rb -t ssh://vagrant@172.30.0.140 --password=vagrant
+```
+![From  Package](https://raw.githubusercontent.com/joy-george/redis-installer/master/redis_from_package.png)
+
+##### Testing **172.30.0.141:**
+```SH
+redis-installer$ chef exec inspec exec cookbooks/install-redis/test/integration/default/server_test.rb -t ssh://vagrant@172.30.0.141 --password=vagrant
+```
+![From  Repository](https://raw.githubusercontent.com/joy-george/redis-installer/master/redis_from_repo.png)
