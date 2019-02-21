@@ -20,7 +20,7 @@ nodes
 
 # ## OS junk files
 # [Tt]humbs.db
-# *.DS_Store
+*.DS_Store
 
 # ## Example of the workstation pattern.
 # !/cookbooks/chef_workstation/files/default/bundler/Gemfile
@@ -37,7 +37,7 @@ nodes
 # ##ruby
 # *.gem
 # Gemfile
-# Gemfile.lock
+Gemfile.lock
 .rake_test_cache
 
 # ## Rails Heroku and other bits to ignore
