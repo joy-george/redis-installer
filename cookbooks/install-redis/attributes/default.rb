@@ -2,7 +2,7 @@ default['redis']['git']['version'] = '5.0.3'
 default['redis']['git']['url'] = 'https://github.com/antirez/redis.git'
 default['redis']['source']['url'] = "http://download.redis.io/releases/redis-#{default['redis']['git']['version']}.tar.gz"
 
-default['usr_local'] = '/usr/local'
+default['redis']['usr_local'] = '/usr/local'
 default['redis']['resource_directory'] = "#{default['usr_local']}/redis-#{default['redis']['git']['version']}"
 default['redis']['etc_conf_dir'] = '/etc/redis'
 default['redis']['port'] = '6379'
