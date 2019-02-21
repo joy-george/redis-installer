@@ -29,7 +29,7 @@ describe 'install-redis::from-repository' do
       expect(chef_run).to custom_install('redis')
         .with(installation_type: installation_type)
     end
-    it 'installs redis from repository' do
+    it 'it downloads from correct revision' do
       expect(chef_run).to sync_git("#{name}-#{version}")
         .with(repository: repository_url,
               revision: "refs/tags/#{version}",

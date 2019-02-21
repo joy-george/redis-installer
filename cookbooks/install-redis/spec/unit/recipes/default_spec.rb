@@ -27,18 +27,12 @@ describe 'install-redis::default' do
     it 'installs tcl' do
       expect(chef_run).to install_apt_package('tcl')
     end
-    it 'installs tcl' do
-      expect(chef_run).to install_apt_package('tcl')
-    end
-
     it 'creates groups successfully' do
       expect(chef_run).to create_group('redis').with(gid: redis_gid)
     end
-
     it 'creates users successfully' do
       expect(chef_run).to create_user('redis').with(uid: redis_uid, gid: redis_gid)
     end
-
     it 'creates redis db directory' do
       expect(chef_run).to create_directory('/var/lib/redis')
         .with(owner: 'redis',
@@ -46,7 +40,6 @@ describe 'install-redis::default' do
               mode: '770',
               recursive: true)
     end
-
     it 'creates redis resource directory' do
       expect(chef_run).to create_directory('/etc/redis')
         .with(owner: 'root',
