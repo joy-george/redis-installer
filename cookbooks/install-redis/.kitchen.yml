@@ -14,13 +14,22 @@ verifier:
 
 platforms:
   - name: ubuntu-16.04
-  - name: centos-7
-
 suites:
-  - name: default
+  - name: from_repo
     run_list:
       - recipe[install-redis::default]
+      - recipe[install-redis::from-repository]
+      - recipe[install-redis::server]
     verifier:
       inspec_tests:
         - test/integration/default
     attributes:
+  - name: from_package
+    run_list:
+      - recipe[install-redis::default]
+      - recipe[install-redis::from-package
+      - recipe[install-redis::server]
+    verifier:
+      inspec_tests:
+        - test/integration/default
+    attributes:    
